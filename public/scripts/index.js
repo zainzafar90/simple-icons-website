@@ -4,6 +4,8 @@ import * as domUtils from './dom-utils.js';
 import newStorage from './storage.js';
 
 import initOrdering from './ordering.js';
+import initDownloadType from './download-type.js';
+import initSearch from './search.js';
 
 document.body.classList.remove('no-js');
 
@@ -36,9 +38,15 @@ if (!document.body.classList.contains('removed')) {
     initModal(document, domUtils);
   }
 
+  async function detachedInitLayout() {
+    const { default: initlayout } = await import('./layout.js');
+    initlayout(document, storage);
+  }
+
   detachedInitColorScheme();
   detachedInitCopyButtons();
   detachedInitSearch();
   detachedInitDownloadType();
   detachedInitModal();
+  detachedInitLayout();
 }

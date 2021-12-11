@@ -60,11 +60,11 @@ if (process.env.TEST_ENV) {
 module.exports = (env, argv) => {
   return {
     entry: {
-      index: path.resolve(ROOT_DIR, 'scripts/index.js'),
+      app: path.resolve(ROOT_DIR, 'scripts/index.js'),
     },
     output: {
       path: OUT_DIR,
-      filename: 'index.js',
+      filename: 'script.js',
     },
     module: {
       rules: [
@@ -178,7 +178,7 @@ module.exports = (env, argv) => {
           iconCount: removedIcons.length,
           pageTitle: 'Removed Icons',
           pageDescription:
-            'Removed icons per version. An icon can be removed for many reasons.',
+            "Removed icons in all previous versions. Some icons can't be shown since they were removed because the brand does not allow them to be modified to fit this library.",
           pageUrl: 'https://simpleicons.org/removed',
         },
       }),
