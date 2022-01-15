@@ -69,6 +69,18 @@
   --lm-color-link-hover: rgb(52, 52, 238);
   --lm-color-link-visited: rgb(85, 26, 139);
 }
+
+.icon-left {
+  width: 50%;
+  height: auto;
+  float: left;
+}
+
+.detail-body {
+  padding: 5px;
+  display: flex;
+}
+
 @media (max-width: 1280px) {
   :root {
     --side-offset: 3rem;
@@ -220,7 +232,18 @@ a {
 }
 
 /* Modal */
-
+.detail_modal {
+  width: 30%;
+  height: auto;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 0.13rem solid var(--color-button-border);
+  z-index: 101;
+  background-color: var(--color-background);
+  border-radius: var(--border-radius-large);
+}
 .popup__top {
   top: calc(var(--header-top-offset) + 65px);
   right: var(--side-offset);
