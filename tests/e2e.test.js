@@ -434,12 +434,12 @@ describe('Grid item', () => {
   });
 
   it('has the color value button enabled', async () => {
-    const $previewButton = await page.$('button.copy-color');
+    const $previewButton = await page.$('button.copy-button.copy-color');
     expect(await isDisabled($previewButton)).toBeFalsy();
   });
 
   it('copies the hex value when it is clicked', async () => {
-    await expect(page).toClick('button.copy-color');
+    await expect(page).toClick('button.copy-button.copy-color');
     const clipboardValue = await getClipboardValue(page);
     expect(clipboardValue).toMatch(COLOR_REGEX);
   });
@@ -505,7 +505,7 @@ describe('JavaScript disabled', () => {
   });
 
   it('has the color value button disabled', async () => {
-    const $colorButton = await page.$('button.copy-color');
+    const $colorButton = await page.$('button.copy-button.copy-color');
     expect(await isDisabled($colorButton)).toBeTruthy();
   });
 
