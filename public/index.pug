@@ -58,6 +58,25 @@ html(lang='en-US')
                   rel='noopener',
                   target='_blank'
                 ) #{ ext.nameAuthor }
+    .detail_modal.detail__top.hidden
+      .detail-body 
+        .icon-left
+          #icon_container.icon-preview
+        .icon-right
+          h2#icon-title.grid-item__title
+          div
+            button#icon-hex.grid-item__color.copy-color
+          div
+            a#icon-source
+          div
+            a#icon-guidelines
+          div
+            a#icon-license
+      .detail-footer
+        a#icon-download-svg.grid-item__button(role='button', download) SVG
+        a#icon-download-color-svg.grid-item__button(role='button', download) Color SVG
+        a#icon-download-pdf.grid-item__button(role='button', download) PDF
+        a#icon-report.report__icon.grid-item__button(role='button') Report
     header.header
       ul.header__list
         li.header__list-item
@@ -369,6 +388,18 @@ html(lang='en-US')
                 title=`${icon.title} color`,
                 disabled
               ) #{ icon.hex }
+              button.grid-item__button.view-button(
+                title=`${icon.title} view`,
+                index=`${icon.indexByAlpha}`
+              )
+                svg(
+                  role='img',
+                  xmlns='http://www.w3.org/2000/svg',
+                  viewBox='0 0 24 24'
+                )
+                  path(
+                    d='m 23.135813,20.69388 -4.41061,-4.41306 c -0.33061,-0.33062 -0.75428,-0.50939 -1.1853,-0.55102 1.32979,-1.65796 2.13061,-3.75919 2.13061,-6.04409 C 19.668513,4.34449 15.323573,0 9.9823425,0 c -5.34122,0 -9.68571,4.34449 -9.68571,9.68571 0,5.34123 4.34449,9.68572 9.68571,9.68572 2.0155095,0 3.8889795,-0.61959 5.4391895,-1.67755 0.01,0.48 0.19592,0.95755 0.56326,1.3249 l 4.41306,4.41306 C 20.775002,23.81143 21.272142,24 21.766832,24 c 0.4947,0 0.99184,-0.18857 1.36898,-0.56816 0.75674,-0.75674 0.75674,-1.98123 10e-7,-2.73796 z M 9.9823425,16.14367 c -3.56081,0 -6.45795,-2.89714 -6.45795,-6.45796 0,-3.56081 2.89714,-6.45795 6.45795,-6.45795 3.5608195,0 6.4579605,2.89714 6.4579605,6.45795 0,3.56082 -2.89714,6.45796 -6.4579605,6.45796 z'
+                  )
               a.grid-item__button(
                 href=`./icons/${icon.slug}.svg`,
                 role='button',

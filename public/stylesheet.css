@@ -74,10 +74,30 @@
   width: 50%;
   height: auto;
   float: left;
+  padding: 5px;
+}
+
+.icon-right {
+  padding: 5px;
+}
+
+.detail-footer {
+  width: 100%;
+  height: auto;
+  display: flex;
+}
+
+.detail-footer a:hover {
+  color: var(--color-button-text-hover);
+  background: var(--color-button-hover);
+}
+
+.italic-text {
+  font-style: italic;
 }
 
 .detail-body {
-  padding: 5px;
+  padding-top: 5px;
   display: flex;
 }
 
@@ -233,7 +253,7 @@ a {
 
 /* Modal */
 .detail_modal {
-  width: 30%;
+  width: 400px;
   height: auto;
   position: fixed;
   top: 50%;

@@ -45,6 +45,12 @@ export function removeClass($el, clazz) {
   }
 }
 
+export function removeClasses($el, ...clazz) {
+  if ($el) {
+    $el.classList.remove(clazz);
+  }
+}
+
 export function toggleClass($el, clazz) {
   if ($el) {
     $el.classList.toggle(clazz);
