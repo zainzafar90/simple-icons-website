@@ -1,5 +1,7 @@
 const simpleIcons = require('simple-icons');
-const icons = Object.values(simpleIcons);
+const icons = Object.values(simpleIcons).sort((icon1, icon2) =>
+  icon1.title.localeCompare(icon2.title),
+);
 const getRelativeLuminance = require('get-relative-luminance').default;
 
 export default async function initModal(document, domUtils) {

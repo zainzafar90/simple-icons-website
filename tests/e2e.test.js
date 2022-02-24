@@ -288,7 +288,9 @@ describe('Search', () => {
 describe('Ordering', () => {
   // only first 30 icons, it's enough to test ordering
   const nIcons = 30;
-  const icons = Object.values(simpleIcons).slice(0, nIcons);
+  const icons = Object.values(simpleIcons)
+    .sort((icon1, icon2) => icon1.title.localeCompare(icon2.title))
+    .slice(0, nIcons);
   const titles = icons
     .map((icon) => icon.title)
     .sort((titleA, titleB) => titleA.localeCompare(titleB));
