@@ -135,11 +135,9 @@ describe('External links', () => {
   });
   it('is possible to click outdated icon link', async () => {
     const reportIcons = await page.$$('a.report__icon');
-    expect(page).toClick(
-      await getAttribute(
-        reportIcons[Math.floor(Math.random() * reportIcons.length)],
-        'href',
-      ),
+    const index = Math.floor(Math.random() * reportIcons.length);
+    reportIcons.forEach((link) =>
+      expect(page).toClick(link.getProperty('href')),
     );
   });
 });
@@ -288,9 +286,11 @@ describe('Search', () => {
 describe('Ordering', () => {
   // only first 30 icons, it's enough to test ordering
   const nIcons = 30;
-  const icons = Object.values(simpleIcons)
-    .sort((icon1, icon2) => icon1.title.localeCompare(icon2.title))
-    .slice(0, nIcons);
+  //const icons = Object.values(simpleIcons)
+  //  .sort((icon1, icon2) => icon1.title.localeCompare(icon2.title))
+  //  .slice(0, nIcons);
+  const icons = Object.values(simpleIcons).slice(0, nIcons);
+
   const titles = icons
     .map((icon) => icon.title)
     .sort((titleA, titleB) => titleA.localeCompare(titleB));
