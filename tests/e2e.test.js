@@ -15,6 +15,7 @@ const {
   isInViewport,
   isVisible,
   getTextContent,
+  getAttribute,
 } = require('./helpers.js');
 
 jest.retryTimes(3);
@@ -286,11 +287,7 @@ describe('Search', () => {
 describe('Ordering', () => {
   // only first 30 icons, it's enough to test ordering
   const nIcons = 30;
-  //const icons = Object.values(simpleIcons)
-  //  .sort((icon1, icon2) => icon1.title.localeCompare(icon2.title))
-  //  .slice(0, nIcons);
   const icons = Object.values(simpleIcons).slice(0, nIcons);
-
   const titles = icons
     .map((icon) => icon.title)
     .sort((titleA, titleB) => titleA.localeCompare(titleB));
@@ -320,23 +317,27 @@ describe('Ordering', () => {
   it('orders grid items alphabetically', async () => {
     await expect(page).toClick('#order-alpha');
 
-    const $gridItems = await page.$$('.grid-item');
+    const $gridItems = await page.$$('button.grid-item__button.view-button');
+
     for (let i = 0; i < nIcons; i++) {
       const $gridItem = $gridItems[i];
+      const attr = await getAttribute($gridItem, 'title');
       const title = titles[i];
-      await expect($gridItem).toMatch(title);
+      await expect(attr).toEqual(title + ' view');
     }
   });
 
   it('orders grid items by color', async () => {
     await expect(page).toClick('#order-color');
-    const $gridItems = await page.$$('button.grid-item__color');
+    const $gridItems = await page.$$(
+      '.grid-item__footer button.grid-item__color',
+    );
 
     const hexes = [];
     for (let i = 0; i < nIcons; i++) {
       const $gridItem = $gridItems[i];
       const color = await getTextContent($gridItem);
-      const hex = color.slice(1);
+      const hex = color;
       hexes.push(hex);
     }
     await expect(sortByColors(hexes)).toEqual(hexes);
@@ -436,12 +437,14 @@ describe('Grid item', () => {
   });
 
   it('has the color value button enabled', async () => {
-    const $previewButton = await page.$('button.copy-button.copy-color');
+    const $previewButton = await page.$('button.copy-color');
     expect(await isDisabled($previewButton)).toBeFalsy();
   });
 
   it('copies the hex value when it is clicked', async () => {
-    await expect(page).toClick('button.copy-button.copy-color');
+    await expect(page).toClick(
+      '.grid-item__footer button.grid-item__color.copy-color',
+    );
     const clipboardValue = await getClipboardValue(page);
     expect(clipboardValue).toMatch(COLOR_REGEX);
   });
@@ -462,13 +465,6 @@ describe('Grid item', () => {
     async (fileType) => {
       await expect(page).toClick(`button#${fileType}`);
       await expect(page).toClick('a[download].grid-item__button');
-    },
-  );
-
-  it.each(['layout-comfortable', 'layout-compact'])(
-    'is possible to click on the "%s" button',
-    async (layoutType) => {
-      await expect(page).toClick(`button#${layoutType}`);
     },
   );
 });
@@ -507,7 +503,9 @@ describe('JavaScript disabled', () => {
   });
 
   it('has the color value button disabled', async () => {
-    const $colorButton = await page.$('button.copy-button.copy-color');
+    const $colorButton = await page.$(
+      '.grid-item__footer button.grid-item__color.copy-color',
+    );
     expect(await isDisabled($colorButton)).toBeTruthy();
   });
 

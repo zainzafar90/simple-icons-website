@@ -8,7 +8,6 @@ import initDownloadType from './download-type.js';
 import initSearch from './search.js';
 
 document.body.classList.remove('no-js');
-
 if (!document.body.classList.contains('removed')) {
   const storage = newStorage(localStorage);
   const orderingControls = initOrdering(window, document, storage, domUtils);
